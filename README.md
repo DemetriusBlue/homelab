@@ -23,3 +23,5 @@ focuses on building, breaking, and monitoring real systems.
   detection, victim, and attacker networks
 - **Planned detection stack**: Wazuh SIEM
 - **Planned attack range**: Kali Linux, Metasploitable, DVWA, Windows AD lab
+
+<img width="431" height="401" alt="Topology drawio" src="https://github.com/user-attachments/assets/88276f2c-e942-42da-8422-22dbe7f5b2b1" />
