@@ -35,6 +35,7 @@ nothing here reflects real network details.
 - [x] Installed Proxmox VE on both nodes
 - [x] Created first VMs
 - [x] Set up Wazuh
+- [ ] Set up OPNSense
 - [ ] Set up Kali Linux
 ...
 
