@@ -8,7 +8,7 @@
 
 ## Where this picks up
 
-In my [last writeup](opnsense-labnet-gateway.md), I made OPNsense the gateway for both of my lab networks:
+In my [last writeup](003-opnsense-labnet-gateway.md), I made OPNsense the gateway for both of my lab networks:
 
 | Network | OPNsense interface | Subnet | What's on it |
 |---|---|---|---|
