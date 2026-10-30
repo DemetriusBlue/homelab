@@ -6,7 +6,7 @@ Alerts come from two places:
 - **Suricata on OPNsense** (network IDS), forwarded to Wazuh over syslog
 - **Wazuh agents** (host events like logins, sudo, and file changes)
 
-See [`../network/network.md`](../network/network.md) for how traffic and logs flow through the lab.
+See [`../network/network.md`](/network/network.md) for how traffic and logs flow through the lab.
 
 ---
 
