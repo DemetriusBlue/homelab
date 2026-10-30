@@ -72,7 +72,17 @@ Because Wazuh lives on pve and fw01 lives on pve02, all LABNET traffic to and fr
 |---|---|---|
 | WAN | Default deny | Private and bogon networks blocked |
 | LAN | Allow LAN net → any | OPNsense default |
-| LABNET | Allow LABNET net → any (logged) | **Temporary.** To be replaced with specific rules |
+| LABNET | **Default deny**, with two exceptions (below) | Vulnerable targets can't reach the internet |
+
+**LABNET rules (top to bottom, first match wins):**
+
+| # | Action | Source | Destination | Purpose |
+|---|---|---|---|---|
+| 1 | Pass | `192.168.100.20` (Wazuh) | any | Wazuh needs updates, threat feeds, and Tailscale |
+| 2 | Pass | LABNET net | LAN net | Targets can reach Kali (e.g., reverse shells during exercises) |
+| 3 | Block (logged) | LABNET net | any | Everything else, including the targets' internet access |
+
+Traffic Kali starts toward the targets still works, because the firewall tracks connection state and lets replies back through. Rule 3 is logged, so any lab host trying to reach out shows up as a firewall block in Wazuh.
 
 - **Outbound NAT:** automatic. LAN and LABNET are both translated to the WAN address.
 - **Anti-spoofing:** LABNET addresses are dropped if they show up on any interface other than `vtnet2`.
@@ -121,14 +131,15 @@ Admin laptop → Tailscale → Proxmox web UI, Wazuh dashboard, and SSH. No port
 
 - **Traffic within LABNET isn't inspected.** VM-to-VM traffic on the same subnet (for example, Metasploitable talking to Wazuh) is switched by the bridge and never crosses fw01.
 - **Encrypted traffic:** Suricata sees TLS metadata (SNI, certificates), not contents.
-- **The LABNET allow-all rule** is broader than it needs to be.
+- **Targets can still reach Kali** (rule 2), which exercises need. A compromised target could pivot toward the attacker LAN, which is acceptable in a lab but worth noting.
 - **Node IPs come from home DHCP.** If a node's address changes, the VXLAN peer list breaks. Both nodes need DHCP reservations or static IPs.
 - **Noise:** Tailscale's STUN traffic triggers ET INFO alerts and still needs tuning.
 
 ## Planned changes
 
-- [ ] Deploy Metasploitable and DVWA on LABNET
-- [ ] Replace the LABNET allow-all rule with specific rules
+- [x] Replace the LABNET allow-all rule with a default-deny policy
+- [ ] Move Metasploitable (VM 100) onto LABNET at `192.168.100.30`
+- [ ] Deploy DVWA (Docker on VM 102) at `192.168.100.31`
 - [ ] Static IPs or DHCP reservations for both Proxmox nodes
 - [ ] Tune out STUN alerts in Wazuh
 - [ ] Separate segment for targets so attacks on them are inspected even from inside the lab
