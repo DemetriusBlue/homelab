@@ -63,9 +63,9 @@ homelab-soc/
 - [x] OPNsense as gateway for attacker and lab networks
 - [x] Suricata IDS on the inside interfaces
 - [x] Suricata and firewall logs flowing into Wazuh
+- [x] Tune noisy alerts (starting with Tailscale STUN traffic)
 - [ ] Deploy Metasploitable and DVWA as targets
 - [ ] Run attack scenarios (nmap, Metasploit, web attacks) and write up the investigations
-- [ ] Tune noisy alerts (starting with Tailscale STUN traffic)
 - [ ] Replace the temporary allow-all lab firewall rule with specific rules
 - [ ] Python port scanner integrated with the lab
 - [ ] Active Directory lab for Windows detection practice
