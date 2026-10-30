@@ -6,7 +6,7 @@ Alerts come from two places:
 - **Suricata on OPNsense** (network IDS), forwarded to Wazuh over syslog
 - **Wazuh agents** (host events like logins, sudo, and file changes)
 
-See [`../network/network.md`](/network/network.md) for how traffic and logs flow through the lab.
+See [`../network/network.md`](../network/network.md) for how traffic and logs flow through the lab.
 
 ---
 
@@ -187,5 +187,6 @@ Deployment will eventually move into an Ansible playbook in [`../automation`](..
 - [ ] Investigate the ET DOS SSDP Amplification Scan alerts (216 in one day): find the source, then tune or escalate
 - [ ] Review the pfSense firewall block alerts (87702) and tune or escalate
 - [ ] Suppress the ET INFO Tailscale DERP Relay alert, scoped to wazuh-server
+- [ ] Alert when a lab target hits the LABNET default-deny rule. A target trying to reach the internet could mean command-and-control (T1071) or exfiltration attempts.
 - [ ] Detection for nmap scans from the attacker LAN (T1046)
 - [ ] Detection for brute-force attempts against lab hosts (T1110)
