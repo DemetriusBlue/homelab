@@ -42,7 +42,7 @@
 
   <!-- ===================== NODE 2 (pve02) ===================== -->
   <rect x="60" y="360" width="620" height="500" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
-  <text x="84" y="388" font-size="16" font-weight="700" fill="#0f172a">pve02 · Node 2 — Gateway &amp; Attacker</text>
+  <text x="84" y="388" font-size="16" font-weight="700" fill="#0f172a">pve02 · Node 2 — Gateway, Attacker &amp; AD</text>
   <text x="84" y="407" font-size="11.5" fill="#64748b">HP EliteDesk 705 G5 Mini · Proxmox VE</text>
 
   <!-- vmbr0 -->
@@ -88,12 +88,13 @@
   <text x="122" y="790" font-size="12" fill="#475569">192.168.10.102 (DHCP)</text>
   <text x="122" y="810" font-size="12" fill="#475569">Traffic to lab crosses fw01</text>
 
-  <!-- Bridges note -->
-  <rect x="380" y="720" width="270" height="110" rx="10" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
-  <text x="397" y="748" font-size="13" font-weight="700" fill="#334155">Bridges</text>
-  <text x="397" y="770" font-size="12" fill="#475569">vmbr0 — uplink to home LAN</text>
-  <text x="397" y="790" font-size="12" fill="#475569">vmbr1 — internal, no physical port</text>
-  <text x="397" y="810" font-size="12" fill="#475569">labnet — SDN VNet across nodes</text>
+  <!-- AD lab: DC01 -->
+  <line x1="515" y1="685" x2="515" y2="720" stroke="#2563eb" stroke-width="2.5"/>
+  <rect x="380" y="720" width="270" height="110" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="397" y="748" font-size="15" font-weight="700" fill="#1f2937">DC01 · Active Directory</text>
+  <text x="397" y="770" font-size="12" fill="#475569">Windows Server 2022</text>
+  <text x="397" y="790" font-size="12" fill="#475569">192.168.100.10 · corp.bluelab.internal</text>
+  <text x="397" y="810" font-size="12" font-style="italic" fill="#94a3b8">attack-and-detect lab in progress</text>
 
   <!-- ===================== NODE 1 (pve) ===================== -->
   <rect x="820" y="360" width="620" height="500" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
@@ -113,33 +114,31 @@
   <text x="867" y="585" font-size="12" fill="#475569">Custom Suricata JSON decoder</text>
   <text x="867" y="605" font-size="12" fill="#475569">Tailscale for remote access</text>
 
-  <!-- Targets (planned) -->
-  <rect x="1140" y="475" width="270" height="150" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <!-- Targets -->
+  <rect x="1140" y="475" width="270" height="150" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" filter="url(#shadow)"/>
   <text x="1157" y="502" font-size="16" font-weight="700" fill="#1f2937">Target VMs</text>
   <text x="1157" y="521" font-size="12" fill="#64748b">Intentionally vulnerable</text>
-  <text x="1157" y="545" font-size="12" fill="#475569">Metasploitable</text>
-  <text x="1157" y="565" font-size="12" fill="#475569">DVWA</text>
-  <text x="1157" y="585" font-size="12" fill="#475569">192.168.100.0/24</text>
-  <text x="1157" y="605" font-size="12" font-style="italic" fill="#94a3b8">planned</text>
-
+  <text x="1157" y="545" font-size="12" fill="#475569"><tspan font-weight="700">Metasploitable 3</tspan> (Ubuntu)</text>
+  <text x="1157" y="565" font-size="12" fill="#475569">192.168.100.30 · Wazuh agent</text>
+  <text x="1157" y="585" font-size="12" fill="#475569">Recon + SSH brute force lab ✓</text>
   <!-- links down to labnet -->
   <line x1="985" y1="625" x2="985" y2="655" stroke="#2563eb" stroke-width="2.5"/>
-  <line x1="1275" y1="625" x2="1275" y2="655" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <line x1="1275" y1="625" x2="1275" y2="655" stroke="#2563eb" stroke-width="2.5"/>
 
   <!-- labnet (node 1 side) -->
   <rect x="850" y="655" width="560" height="30" rx="5" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
   <text x="1130" y="675" font-size="12" font-weight="600" fill="#1e40af" text-anchor="middle">labnet · SDN VXLAN VNI 100 · 192.168.100.0/24 · gateway .1 = OPNsense</text>
 
   <!-- Lower row -->
-  <rect x="850" y="720" width="270" height="110" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 4"/>
-  <text x="867" y="748" font-size="15" font-weight="700" fill="#1f2937">Active Directory lab</text>
-  <text x="867" y="770" font-size="12" fill="#475569">Domain + endpoints for</text>
-  <text x="867" y="790" font-size="12" fill="#475569">Windows detection practice</text>
-  <text x="867" y="810" font-size="12" font-style="italic" fill="#94a3b8">planned</text>
+  <rect x="850" y="720" width="270" height="110" rx="10" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="867" y="748" font-size="13" font-weight="700" fill="#334155">Bridges</text>
+  <text x="867" y="770" font-size="12" fill="#475569">vmbr0 — uplink to home LAN</text>
+  <text x="867" y="790" font-size="12" fill="#475569">vmbr1 — internal only (pve02)</text>
+  <text x="867" y="810" font-size="12" fill="#475569">labnet — SDN VNet across nodes</text>
 
   <rect x="1140" y="720" width="270" height="110" rx="10" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.2"/>
-  <text x="1157" y="748" font-size="13" font-weight="700" fill="#334155">Wazuh agents</text>
-  <text x="1157" y="770" font-size="12" fill="#475569">pve02 host → Wazuh</text>
+  <text x="1157" y="748" font-size="13" font-weight="700" fill="#334155">Wazuh agents (4 lab)</text>
+  <text x="1157" y="770" font-size="12" fill="#475569">pve · pve02 · lab-kali · MS3</text>
   <text x="1157" y="790" font-size="12" fill="#475569">Auth, sshd and PAM events</text>
   <text x="1157" y="810" font-size="12" fill="#475569">alongside network alerts</text>
 
@@ -171,7 +170,9 @@
   <text x="904" y="926" font-size="12" fill="#334155">Log flow to Wazuh</text>
 
   <rect x="1060" y="913" width="30" height="18" rx="3" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/>
-  <text x="1098" y="926" font-size="12" fill="#334155">Planned</text>
+  <text x="1098" y="926" font-size="12" fill="#334155">In progress</text>
+
+  <text x="1440" y="958" font-size="11.5" fill="#94a3b8" text-anchor="end">Updated Nov 2026</text>
 
   <text x="60" y="958" font-size="11.5" fill="#94a3b8">Hardware: 2× HP EliteDesk 705 G5 Mini · Ryzen 5 Pro 3400G · 16 GB RAM · 256 GB NVMe each</text>
 </svg>
